@@ -70,31 +70,55 @@ header {
 }
 
 .hero-section {
-  background-image: url(/Assets/Screenshot\ 2026-11-04\ 235044.png);
-  background-size: 100%;
-  height: 87vh;
+  background-image:
+    linear-gradient(
+            rgba(0,0,0,0.25),
+            rgba(0,0,0,0.45)
+        ),
+   url(/Assets/Screenshot\ 2026-11-04\ 235044.png);
+  height: 85vh;
+      background-size: cover;
+    background-position: center;
   background-repeat: no-repeat;
+  
 }
 .hero-heading {
-  font-size: 3.8rem;
-  font-family: "Times New Roman", Times, serif;
-  color: rgb(127, 84, 68);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-family: Georgia, serif;
+  color: #a77c61;
+  line-height: 1.1;
+  margin: 20px 0;
   font-weight: bolder;
 }
+
+.hero-description {
+    color: #c7b1a9;
+    font-size: 17px;
+    margin-bottom: 25px;
+}
+
 .hero-para {
   font-family: "Times New Roman", Times, serif;
   color: rgb(199, 177, 169);
   font-weight: 800;
 }
 .tou-hero-btn {
+  display:inline-block;
   background-color: transparent;
-  padding: 0.7rem;
-  color: rgb(199, 177, 169);
-  font-family: "Times New Roman", Times, serif;
-  border-left: 0.6px solid white;
-  border-top: 3px solid whitesmoke;
+  padding: 13px 25px;
+  color: #c7b1a9;
+  font-family: Georgia, serif;
+  border: 1px solid #a77c61;
+  border-left:1px solid #a77c61;
+  border-top: 1px solid #a77c61;
   border-bottom: none;
   border-right: none;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+.tou-hero-btn:hover {
+    background-color: #a77c61;
+    color: #0b1215;
 }
 /* .Arrivals-section{
 
