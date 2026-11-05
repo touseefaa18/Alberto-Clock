@@ -2,13 +2,16 @@
   margin: 0;
   padding: 0;
 }
-html {
+html,
+body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 header {
   background-color: #0b1215;
   max-width: 100%;
-  height: 13vh;
+  height: 12vh;
+  border-bottom: 0.1rem solid white;
 }
 .tou-nav {
   display: flex;
@@ -70,56 +73,48 @@ header {
 }
 
 .hero-section {
-  background-image:
-    linear-gradient(
-            rgba(0,0,0,0.25),
-            rgba(0,0,0,0.45)
-        ),
-   url(/Assets/Screenshot\ 2026-11-04\ 235044.png);
-  height: 85vh;
-      background-size: cover;
-    background-position: center;
+  background-image: url(/Assets/Screenshot\ 2026-11-04\ 235044.png);
+  background-size: 100%;
+  height: 87vh;
   background-repeat: no-repeat;
-  
 }
 .hero-heading {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-family: Georgia, serif;
-  color: #a77c61;
-  line-height: 1.1;
-  margin: 20px 0;
+  font-size: 3.8rem;
+  font-family: "Times New Roman", Times, serif;
+  color: rgb(127, 84, 68);
   font-weight: bolder;
 }
-
-.hero-description {
-    color: #c7b1a9;
-    font-size: 17px;
-    margin-bottom: 25px;
-}
-
 .hero-para {
   font-family: "Times New Roman", Times, serif;
   color: rgb(199, 177, 169);
   font-weight: 800;
 }
 .tou-hero-btn {
-  display:inline-block;
   background-color: transparent;
-  padding: 13px 25px;
-  color: #c7b1a9;
-  font-family: Gerogia, serif;
-  border: 1px solid #a77c61;
-  border-left:1px solid #a77c61;
-  border-top: 1px solid #a77c61;
+  padding: 0.7rem;
+  font-weight: 800;
+  color: rgb(199, 177, 169);
+  font-family: "Times New Roman", Times, serif;
+  border-left: 0.6px solid whitesmoke;
+  border-top: 3px solid whitesmoke;
   border-bottom: none;
   border-right: none;
-  text-decoration: none;
-  transition: 0.3s ease;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.25s ease;
 }
+
 .tou-hero-btn:hover {
-    background-color: #a77c61;
-    color: #0b1215;
+  background: transparent;
+  color: rgb(199, 177, 169);
+  transform: translateY(-3px);
+  border-right: 0.6px solid whitesmoke;
+  border-bottom: 3px solid whitesmoke;
+  border-top: none;
+  border-left: none;
 }
+
 /* .Arrivals-section{
 
 } */
@@ -131,7 +126,7 @@ header {
   justify-content: center;
   display: flex;
 
-  border: 0.5rem solid  rgb(199, 177, 169);
+  border-bottom: 0.1rem solid rgb(199, 177, 169);
   border-radius: 3px;
 }
 .arrival-heading-div {
@@ -145,10 +140,8 @@ header {
   background-repeat: no-repeat;
   border-radius: 0.3rem;
   border: 5px solid #0b1215;
-  font-family: 'Times New Roman', Times, serif;
-  color: rgb(199, 177, 169);;
-
-
+  font-family: "Times New Roman", Times, serif;
+  color: rgb(199, 177, 169);
 }
 #tou-img-grid-2 {
   background-image: url(/Assets/Screenshot\ 2026-11-05\ 004026.png);
@@ -157,8 +150,8 @@ header {
   background-repeat: no-repeat;
   border: 5px solid #0b1215;
   border-radius: 0.3rem;
-    font-family: 'Times New Roman', Times, serif;
-  color: rgb(199, 177, 169);;
+  font-family: "Times New Roman", Times, serif;
+  color: rgb(199, 177, 169);
 }
 #tou-img-grid-3 {
   background-image: url(/Assets/Screenshot\ 2026-11-05\ 005548.png);
@@ -167,13 +160,20 @@ header {
   background-repeat: no-repeat;
   border: 5px solid #0b1215;
   border-radius: 0.3rem;
-    font-family: 'Times New Roman', Times, serif;
-  color: rgb(199, 177, 169);;
+  font-family: "Times New Roman", Times, serif;
+  color: rgb(199, 177, 169);
 }
 .tou-row {
   background-color: #0b1215;
+  padding-top: 1.5rem;
+}
+.touseef-row {
+  background-color: #0b1215;
 }
 .tou-col-4 {
+  background-color: #0b1215;
+}
+.touseef-col-4 {
   background-color: #0b1215;
 }
 .tou-space {
@@ -181,25 +181,132 @@ header {
   height: 8vh;
   background-color: #0b1215;
 }
-.grid-para-div{
+.grid-para-div {
   max-width: 56%;
   color: rgb(199, 177, 169);
-  
+}
+#tou-img-grid-4 {
+  background-image: url(/Assets/Screenshot\ 2026-11-05\ 004108.png);
+  background-size: 100%;
+  height: 38vh;
+  background-repeat: no-repeat;
+  border-radius: 0.3rem;
+  border: 5px solid #0b1215;
+  font-family: "Times New Roman", Times, serif;
+  color: rgb(199, 177, 169);
+}
+#tou-img-grid-5 {
+  background-image: url(/Assets/Screenshot\ 2026-11-05\ 004026.png);
+  background-size: 100%;
+  height: 38vh;
+  background-repeat: no-repeat;
+  border: 5px solid #0b1215;
+  border-radius: 0.3rem;
+  font-family: "Times New Roman", Times, serif;
+  color: rgb(199, 177, 169);
+}
+#tou-img-grid-6 {
+  background-image: url(/Assets/Screenshot\ 2026-11-05\ 005548.png);
+  background-size: 100%;
+  height: 38vh;
+  background-repeat: no-repeat;
+  border: 5px solid #0b1215;
+  border-radius: 0.3rem;
+  font-family: "Times New Roman", Times, serif;
+  color: rgb(199, 177, 169);
+}
+.tou-arrival-btn {
+  background-color: transparent;
+  padding: 0.7rem;
+  font-weight: 800;
+  color: rgb(199, 177, 169);
+  font-family: "Times New Roman", Times, serif;
+  border-left: 0.6px solid whitesmoke;
+  border-top: 3px solid whitesmoke;
+  border-bottom: none;
+  border-right: none;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.25s ease;
 }
 
-.technology-heading{
-    font-family: "Times New Roman", Times, serif;
-   color: rgb(127, 84, 68);;  
+.tou-arrival-btn:hover {
+  background: transparent;
+  color: rgb(199, 177, 169);
+  transform: translateY(-3px);
+  border-right: 0.6px solid whitesmoke;
+  border-bottom: 3px solid whitesmoke;
+  border-top: none;
+  border-left: none;
+}
+.technology-section {
+  background-color: #0b1215;
+}
+
+.technology-heading {
+  font-family: "Times New Roman", Times, serif;
+  color: rgb(127, 84, 68);
   font-weight: bolder;
   font-size: 3rem;
   justify-content: center;
   display: flex;
-  border: 0.5rem solid rgb(199, 177, 169);  
+  border-bottom: 0.1rem solid rgb(199, 177, 169);
 }
 .technology-heading-div {
   background-color: #0b1215;
   height: 13vh;
 }
+.technology-description {
+  max-width: 80%;
+  margin: auto;
+  font-family: "Times New Roman", Times, serif;
+  color: rgb(199, 177, 169);
+}
+.technology-spacing-div {
+  max-width: 100%;
+  height: 5vh;
+  background-color: #0b1215;
+}
+.touseef-technology-grid {
+  height: 50vh;
+}
+.touseef-technology-grid-btn {
+  background-color: #0b1215;
+  padding: 0.7rem;
+  color: rgb(199, 177, 169);
+  font-family: "Times New Roman", Times, serif;
+  border-left: 0.6px solid white;
+  border-top: 3px solid whitesmoke;
+  border-bottom: none;
+  border-right: none;
+}
+.touseef-technology-grid-btn {
+  background-color: transparent;
+  padding: 0.7rem;
+  font-weight: 800;
+  color: rgb(199, 177, 169);
+  font-family: "Times New Roman", Times, serif;
+  border-left: 0.6px solid whitesmoke;
+  border-top: 3px solid whitesmoke;
+  border-bottom: none;
+  border-right: none;
+  transition:
+    background 0.5s ease,
+    color 0.5s ease,
+    transform 0.3s ease;
+}
+
+.touseef-technology-grid-btn:hover {
+  background: transparent;
+  color: rgb(199, 177, 169);
+  transform: translateY(-3px);
+  border-right: 0.6px solid whitesmoke;
+  border-bottom: 3px solid whitesmoke;
+  border-top: none;
+  border-left: none;
+}
+
 .gallery-section {
     background-color: #0b1215;
     padding: 70px 5%;
