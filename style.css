@@ -274,7 +274,7 @@ header {
     z-index: 1;
     color: rgb(199, 177, 169);
     font-family: "Times New Roman", serif;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
 }
 .gallery-item:hover img {
     transform: scale(1.1);
