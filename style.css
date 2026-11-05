@@ -115,9 +115,7 @@ header {
   border-left: none;
 }
 
-/* .Arrivals-section{
 
-} */
 .arrival-heading {
   font-family: "Times New Roman", Times, serif;
   color: rgb(127, 84, 68);
@@ -126,8 +124,7 @@ header {
   justify-content: center;
   display: flex;
 
-  border-bottom: 0.1rem solid rgb(199, 177, 169);
-  border-radius: 3px;
+  
 }
 .arrival-heading-div {
   background-color: #0b1215;
@@ -251,7 +248,7 @@ header {
   font-size: 3rem;
   justify-content: center;
   display: flex;
-  border-bottom: 0.1rem solid rgb(199, 177, 169);
+  
 }
 .technology-heading-div {
   background-color: #0b1215;
