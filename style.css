@@ -97,8 +97,8 @@ header {
   font-family: "Times New Roman", Times, serif;
   border-left: 0.6px solid whitesmoke;
   border-top: 3px solid whitesmoke;
-    border-bottom: none;
-   border-right: none; 
+  border-bottom: none;
+  border-right: none;
   transition:
     background 0.3s ease,
     color 0.3s ease,
@@ -223,8 +223,8 @@ header {
   font-family: "Times New Roman", Times, serif;
   border-left: 0.6px solid whitesmoke;
   border-top: 3px solid whitesmoke;
-    border-bottom: none;
-   border-right: none; 
+  border-bottom: none;
+  border-right: none;
   transition:
     background 0.3s ease,
     color 0.3s ease,
@@ -289,12 +289,12 @@ header {
   font-family: "Times New Roman", Times, serif;
   border-left: 0.6px solid whitesmoke;
   border-top: 3px solid whitesmoke;
-    border-bottom: none;
-   border-right: none; 
+  border-bottom: none;
+  border-right: none;
   transition:
     background 0.5s ease,
     color 0.5s ease,
-    transform 0.30s ease;
+    transform 0.3s ease;
 }
 
 .touseef-technology-grid-btn:hover {
@@ -305,5 +305,4 @@ header {
   border-bottom: 3px solid whitesmoke;
   border-top: none;
   border-left: none;
-
 }
