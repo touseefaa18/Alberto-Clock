@@ -267,7 +267,6 @@ header {
         rgba(0, 0, 0, 0.85)
     );
 }
-
 .gallery-item figcaption {
     position: absolute;
     bottom: 20px;
@@ -280,7 +279,19 @@ header {
 .gallery-item:hover img {
     transform: scale(1.1);
 }
-
 .gallery-item:hover {
     border-color: #a77c61;
+}
+@media (max-width: 600px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 240px;
+    }
+    .gallery-item-large {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+    .gallery-heading {
+        font-size: 2.3rem;
+    }
 }
