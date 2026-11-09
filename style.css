@@ -325,6 +325,16 @@ header {
   color: var(--color-accent);
   font-weight: bolder;
 }
+.hero-content {
+    max-width: 550px;
+}
+
+.hero-description {
+    color: #c7b1a9;
+    font-size: 17px;
+    margin-bottom: 25px;
+}
+
 .hero-para {
   font-family: "Times New Roman", Times, serif;
   color: var(--color-text-muted);
