@@ -159,7 +159,10 @@ header {
   border-radius: 0.3rem;
   border: 5px solid #0b1215;
   font-family: "Times New Roman", Times, serif;
-  color: rgb(199, 177, 169);
+  color: transparent;
+}
+#tou-img-grid :hover{
+  back
 }
 #tou-img-grid-2 {
   background-image: url(/Assets/Screenshot\ 2026-11-05\ 004026.webp);
@@ -237,12 +240,14 @@ header {
   background-color: transparent;
   padding: 0.6rem;
   font-weight: 800;
-  color: rgb(199, 177, 169);
+  color: transparent;
+  /* color: rgb(199, 177, 169); */
   font-family: "Times New Roman", Times, serif;
-  border-left: 0.6px solid whitesmoke;
-  border-top: 3px solid whitesmoke;
-  border-bottom: none;
-  border-right: none;
+  /* border-left: 0.6px solid whitesmoke;
+  border-top: 3px solid whitesmoke; */
+  border: none;
+  /* border-bottom: none;
+  border-right: none; */
   transition:
     background 0.3s ease,
     color 0.3s ease,
