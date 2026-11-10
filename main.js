@@ -455,6 +455,7 @@
       toggleZoom();
     }
   });
+  
 
   /* ---- Touch / Swipe support ---- */
   var touchStartX = 0;
