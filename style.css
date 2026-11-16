@@ -2470,12 +2470,14 @@ button {
     height: 82px;
   }
   .ac-nav-brand {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    padding: 0 !important;
   }
   .ac-nav-brand:hover {
-    transform: translateX(-50%) translateY(-1px);
+    transform: translate(-50%, calc(-50% - 1.5px)) !important;
   }
   .ac-brand-badge {
     width: 58px;
@@ -2486,7 +2488,15 @@ button {
   }
   .ac-hamburger {
     display: flex !important;
-    margin-left: auto;
+    position: absolute !important;
+    right: 1.5rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 100 !important;
+    border: 1px solid rgba(201, 168, 108, 0.4) !important;
+  }
+  .ac-ham-bar {
+    background: var(--ac-gold) !important;
   }
   .ac-mobile-menu {
     display: flex !important;
@@ -2499,15 +2509,18 @@ button {
     --section-pad: 4rem 0;
   }
   .ac-nav {
-    padding: 0 1.25rem;
-    height: 74px;
+    padding: 0 1.25rem !important;
+    height: 82px !important;
+  }
+  .ac-hamburger {
+    right: 1.25rem !important;
   }
   .ac-brand-badge {
     width: 50px;
     height: 30px;
   }
   .ac-brand-signature {
-    font-size: 1.6rem;
+    font-size: 1.65rem;
   }
   .ac-brand-sub {
     font-size: 0.5rem;
