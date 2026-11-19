@@ -977,20 +977,20 @@ button {
   overflow: hidden;
 }
 #ac-img-1 {
-  background-image: url("./Assets/Screenshot 2026-11-05 004108.webp");
+  background-image: url("./Asets/Screenshot 2026-11-05 004108.webp");
 }
 #ac-img-2 {
-  background-image: url("./Assets/Screenshot 2026-11-05 004026.webp");
+  background-image: url("./Asets/Screenshot 2026-11-05 004026.webp");
 }
 #ac-img-3 {
-  background-image: url("./Assets/Screenshot 2026-11-05 005548.webp");
+  background-image: url("./Asets/Screenshot 2026-11-05 005548.webp");
 }
 #ac-img-4 {
-  background-image: url("./Assets/Vacheron Constantin Luxury Watch Display.webp");
+  background-image: url("./Asets/Vacheron Constantin Luxury Watch Display.webp");
 }
 /* Fallback: Bulova Automatic */
 .ac-watch-card-img.ac-img-bulova {
-  background-image: url("./Assets/Bulova Automatic Watch Luxury Display.webp");
+  background-image: url("./Asets/Bulova Automatic Watch Luxury Display.webp");
 }
 
 .ac-watch-card-img::after {
