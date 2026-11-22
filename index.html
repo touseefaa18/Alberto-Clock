@@ -119,6 +119,16 @@
           <li><a href="#home"       class="ac-nav-link" data-section="home">Home</a></li>
           <li><a href="#arrivals"   class="ac-nav-link" data-section="arrivals">New Arrivals</a></li>
           <li><a href="#technology" class="ac-nav-link" data-section="technology">Technology</a></li>
+          <li>
+    <a href="#store-locator"
+       class="ac-nav-link"
+       data-section="store-locator">
+        Store Locator
+    </a>
+</li> 
+          <a href="#price-list" class="ac-nav-link">
+    Price List
+</a>
         </ul>
 
         <!-- Brand — CENTER (Split Layout with Oval Emblem & Signature Script) -->
@@ -150,6 +160,25 @@
                 <text x="50" y="37" text-anchor="middle" class="ac-badge-text">A</text>
               </svg>
             </div>
+
+<!-- ALBERTO VISITOR COUNTER -->
+
+<span class="ac-visitor-counter"
+      role="status"
+      aria-label="Website visitor count">
+
+    <span class="ac-visitor-counter-label">
+        VISITORS
+    </span>
+
+    <strong id="acVisitorCount">
+        000
+    </strong>
+
+</span>
+
+<!-- END VISITOR COUNTER -->
+
           </div>
           <span class="ac-brand-signature">Alberto Clocks</span>
           <span class="ac-brand-sub">Geneva · Est. 1987</span>
@@ -159,6 +188,9 @@
         <ul class="ac-nav-links ac-nav-right-links" role="list">
           <li><a href="#gallery"    class="ac-nav-link" data-section="gallery">Gallery</a></li>
           <li><a href="#about"      class="ac-nav-link" data-section="about">About</a></li>
+          <li>
+    <a href="#support" class="ac-nav-link" data-section="support">Support</a>
+</li>
           <li><a href="#contact"    class="ac-nav-link" data-section="contact">Contact</a></li>
         </ul>
 
@@ -175,6 +207,8 @@
         <a href="#home"       class="ac-mobile-link">Home</a>
         <a href="#arrivals"   class="ac-mobile-link">New Arrivals</a>
         <a href="#technology" class="ac-mobile-link">Technology</a>
+        <a href="#store-locator" class="ac-mobile-link"> Store Locator</a>
+       <a href="#support" class="ac-mobile-link">Support</a>
         <a href="#gallery"    class="ac-mobile-link">Gallery</a>
         <a href="#about"      class="ac-mobile-link">About</a>
         <a href="#founders"   class="ac-mobile-link">Founders</a>
@@ -186,7 +220,7 @@
     <section class="ac-hero" id="home" aria-label="Hero — Alberto Clocks Luxury Watches">
       <!-- Video Background -->
       <video class="ac-hero-video" autoplay loop muted playsinline aria-hidden="true">
-        <source src="./Asets/WhatsApp Video 2026-11-09 at 12.17.54 AM.mp4" type="video/mp4" />
+        <source src="./Assets/WhatsApp Video 2026-11-09 at 12.17.54 AM.mp4" type="video/mp4" />
       </video>
       <!-- Gradient Overlay -->
       <div class="ac-hero-overlay" aria-hidden="true"></div>
@@ -277,114 +311,142 @@
           <p class="ac-section-subtext ac-reveal-up" data-delay="100">Discover the latest masterpieces from our Geneva workshop, each one a testament to Swiss horology at its finest.</p>
         </div>
 
+        <!-- PRODUCT CATEGORY FILTERS AND SORTING -->
+        <div class="ac-catalogue-toolbar">
+          <div class="ac-category-filters"
+               id="acCategoryFilters"
+               role="group"
+               aria-label="Filter watches by category">
+            <button type="button"
+                    class="ac-category-filter ac-selected"
+                    data-category="all"
+                    aria-pressed="true">All Watches</button>
+            <button type="button"
+                    class="ac-category-filter"
+                    data-category="Vintage"
+                    aria-pressed="false">Vintage</button>
+            <button type="button"
+                    class="ac-category-filter"
+                    data-category="Luxury"
+                    aria-pressed="false">Luxury</button>
+            <button type="button"
+                    class="ac-category-filter"
+                    data-category="Classic"
+                    aria-pressed="false">Classic</button>
+          </div>
 
+          <label class="ac-sort-control" for="acProductSort">
+            <span>Sort By</span>
+            <select id="acProductSort">
+              <option value="featured">Featured</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="name-az">Name: A to Z</option>
+              <option value="name-za">Name: Z to A</option>
+            </select>
+          </label>
+        </div>
 
+        <p class="ac-catalogue-status"
+           id="acCatalogueStatus"
+           role="status"
+           aria-live="polite">Loading watches...</p>
 
-<p class="ac-catalogue-status"
-   id="acCatalogueStatus"
-   role="status"
-   aria-live="polite">
-    Loading watches...
-</p>
-
-
-<!-- PRODUCT CATEGORY FILTERS -->
-
-<div class="ac-catalogue-toolbar">
-
-    <div class="ac-category-filters"
-         id="acCategoryFilters"
-         role="group"
-         aria-label="Filter watches by category">
-
-        <button type="button"
-                class="ac-category-filter ac-selected"
-                data-category="all"
-                aria-pressed="true">
-            All Watches
-        </button>
-
-        <button type="button"
-                class="ac-category-filter"
-                data-category="Vintage"
-                aria-pressed="false">
-            Vintage
-        </button>
-
-        <button type="button"
-                class="ac-category-filter"
-                data-category="Luxury"
-                aria-pressed="false">
-            Luxury
-        </button>
-
-        <button type="button"
-                class="ac-category-filter"
-                data-category="Classic"
-                aria-pressed="false">
-            Classic
-        </button>
-
-    </div>
-
-    <label class="ac-sort-control" for="acProductSort">
-
-    <span>Sort By</span>
-
-    <select id="acProductSort">
-
-        <option value="featured">
-            Featured
-        </option>
-
-        <option value="price-low">
-            Price: Low to High
-        </option>
-
-        <option value="price-high">
-            Price: High to Low
-        </option>
-
-        <option value="name-az">
-            Name: A to Z
-        </option>
-
-        <option value="name-za">
-            Name: Z to A
-        </option>
-
-    </select>
-
-</label>
-
-
-</div>
-</div>
-
-
-<p class="ac-catalogue-status"
-   id="acCatalogueStatus"
-   role="status"
-   aria-live="polite">
-    Loading watches...
-</p>
-
-
-<!-- Dynamic Product Grid -->
-<div
-    class="row g-4 ac-arrivals-grid"
-    id="acProductGrid"
-    aria-live="polite"
-    aria-label="Alberto watch collection">
-
-    <div class="col-12 text-center">
-        <p class="ac-section-subtext">
-            Loading our watch collection...
-        </p>
+        <!-- Dynamic Product Grid -->
+        <div class="row g-4 ac-arrivals-grid"
+             id="acProductGrid"
+             aria-live="polite"
+             aria-label="Alberto watch collection">
+          <div class="col-12 text-center">
+            <p class="ac-section-subtext">Loading our watch collection...</p>
           </div>
         </div>
       </div>
     </section>
+
+
+<!-- =========================================
+     ALBERTO COMPLETE PRICE LIST
+     ========================================= -->
+
+<section class="ac-section ac-price-list-section"
+         id="price-list"
+         aria-labelledby="acPriceHeading">
+
+    <div class="container-fluid">
+
+        <div class="ac-section-header text-center">
+
+            <p class="ac-section-eyebrow">
+                — Complete Collection —
+            </p>
+
+            <h2 class="ac-section-heading"
+                id="acPriceHeading">
+                The Price List
+            </h2>
+
+            <p class="ac-section-subtext">
+                Explore our complete selection of
+                distinguished Alberto timepieces.
+            </p>
+
+        </div>
+
+
+        <div class="ac-price-list-container">
+
+            <div class="ac-price-list-header">
+
+                <span>ALBERTO WATCH COLLECTION</span>
+
+                <span id="acPriceCount">
+                    Loading collection...
+                </span>
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <table class="ac-price-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Watch</th>
+                            <th>Reference</th>
+                            <th>Collection</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Details</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="acPriceTableBody">
+
+                        <tr>
+                            <td colspan="6">
+                                Loading watch prices...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- END PRICE LIST -->
+
 
     <!-- ==================== TECHNOLOGY ==================== -->
     <section class="ac-section ac-tech" id="technology" aria-labelledby="tech-heading">
@@ -478,7 +540,7 @@
             data-lb-caption="Signature Collection"
             tabindex="0" role="button" aria-label="Open Signature Collection in fullscreen"
           >
-            <img src="./Asets/Bulova Automatic Watch Luxury Display.webp" alt="Bulova automatic luxury wristwatch — Signature Collection by Alberto Clocks" loading="lazy" />
+            <img src="./Assets/Bulova Automatic Watch Luxury Display.webp" alt="Bulova automatic luxury wristwatch — Signature Collection by Alberto Clocks" loading="lazy" />
             <figcaption class="ac-gallery-caption">
               <span class="ac-gallery-caption-title">Signature Collection</span>
               <span class="ac-gallery-caption-hint">
@@ -495,7 +557,7 @@
             data-lb-caption="Modern Elegance"
             tabindex="0" role="button" aria-label="Open Modern Elegance in fullscreen"
           >
-            <img src="./Asets/Luxurious Michael Kors Gold Watch Display.webp" alt="Michael Kors gold luxury watch — Modern Elegance" loading="lazy" />
+            <img src="./Assets/Luxurious Michael Kors Gold Watch Display.webp" alt="Michael Kors gold luxury watch — Modern Elegance" loading="lazy" />
             <figcaption class="ac-gallery-caption">
               <span class="ac-gallery-caption-title">Modern Elegance</span>
               <span class="ac-gallery-caption-hint">
@@ -512,7 +574,7 @@
             data-lb-caption="Timeless Design"
             tabindex="0" role="button" aria-label="Open Timeless Design in fullscreen"
           >
-            <img src="./Asets/Citizen Eco-Drive in Midnight Blue.webp" alt="Citizen Eco-Drive midnight blue premium wristwatch" loading="lazy" />
+            <img src="./Assets/Citizen Eco-Drive in Midnight Blue.webp" alt="Citizen Eco-Drive midnight blue premium wristwatch" loading="lazy" />
             <figcaption class="ac-gallery-caption">
               <span class="ac-gallery-caption-title">Timeless Design</span>
               <span class="ac-gallery-caption-hint">
@@ -529,7 +591,7 @@
             data-lb-caption="Precision Movement"
             tabindex="0" role="button" aria-label="Open Precision Movement in fullscreen"
           >
-            <img src="./Asets/Screenshot 2026-11-05 004026.webp" alt="Alberto Clocks mechanical watch precision movement" loading="lazy" />
+            <img src="./Assets/Screenshot 2026-11-05 004026.webp" alt="Alberto Clocks mechanical watch precision movement" loading="lazy" />
             <figcaption class="ac-gallery-caption">
               <span class="ac-gallery-caption-title">Precision Movement</span>
               <span class="ac-gallery-caption-hint">
@@ -546,7 +608,7 @@
             data-lb-caption="Premium Craftsmanship"
             tabindex="0" role="button" aria-label="Open Premium Craftsmanship in fullscreen"
           >
-            <img src="./Asets/Screenshot 2026-11-04 235044.png" alt="Vacheron Constantin luxury watch premium craftsmanship" loading="lazy" />
+            <img src="./Assets/Screenshot 2026-11-04 235044.png" alt="Vacheron Constantin luxury watch premium craftsmanship" loading="lazy" />
             <figcaption class="ac-gallery-caption">
               <span class="ac-gallery-caption-title">Premium Craftsmanship</span>
               <span class="ac-gallery-caption-hint">
@@ -563,7 +625,7 @@
             data-lb-caption="Alberto Classics"
             tabindex="0" role="button" aria-label="Open Alberto Classics in fullscreen"
           >
-            <img src="./Asets/Screenshot 2026-11-05 004108.webp" alt="Alberto Clocks classic luxury watch collection" loading="lazy" />
+            <img src="./Assets/Screenshot 2026-11-05 004108.webp" alt="Alberto Clocks classic luxury watch collection" loading="lazy" />
             <figcaption class="ac-gallery-caption">
               <span class="ac-gallery-caption-title">Alberto Classics</span>
               <span class="ac-gallery-caption-hint">
@@ -774,6 +836,509 @@
       </div>
     </section>
 
+
+<!-- =========================================
+     ALBERTO STORE LOCATOR
+     ========================================= -->
+
+<section class="ac-section ac-store-locator"
+         id="store-locator"
+         aria-labelledby="store-heading">
+
+    <div class="container">
+
+        <div class="ac-section-header text-center">
+
+            <p class="ac-section-eyebrow ac-reveal-left">
+                — Visit Our Atelier —
+            </p>
+
+            <h2 class="ac-section-heading ac-reveal-up"
+                id="store-heading">
+                Find Alberto
+            </h2>
+
+            <p class="ac-section-subtext ac-reveal-up">
+                Discover the Alberto experience at our
+                flagship atelier in Geneva, Switzerland.
+                Meet our team and explore the world of
+                fine horology.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4 align-items-stretch">
+
+            <!-- STORE INFORMATION -->
+
+            <div class="col-12 col-lg-5">
+
+                <div class="ac-contact-card ac-store-info-card ac-reveal-left">
+
+                    <p class="ac-section-eyebrow">
+                        Our Flagship Location
+                    </p>
+
+                    <h3 class="ac-contact-card-title">
+                        Geneva Atelier
+                    </h3>
+
+
+                    <ul class="ac-contact-info-list"
+                        role="list">
+
+
+                        <!-- ADDRESS -->
+
+                        <li class="ac-contact-info-item">
+
+                            <span class="ac-contact-icon"
+                                  aria-hidden="true">
+                                ⚐
+                            </span>
+
+                            <div>
+
+                                <p class="ac-contact-label">
+                                    Address
+                                </p>
+
+                                <p class="ac-contact-text">
+                                    Rue du Rhône 42,<br>
+                                    1204 Genève,<br>
+                                    Switzerland
+                                </p>
+
+                            </div>
+
+                        </li>
+
+
+                        <!-- TELEPHONE -->
+
+                        <li class="ac-contact-info-item">
+
+                            <span class="ac-contact-icon"
+                                  aria-hidden="true">
+                                ☎
+                            </span>
+
+                            <div>
+
+                                <p class="ac-contact-label">
+                                    Telephone
+                                </p>
+
+                                <p class="ac-contact-text">
+                                    <a href="tel:+41228199000">
+                                        +41 22 819 9000
+                                    </a>
+                                </p>
+
+                            </div>
+
+                        </li>
+
+
+                        <!-- EMAIL -->
+
+                        <li class="ac-contact-info-item">
+
+                            <span class="ac-contact-icon"
+                                  aria-hidden="true">
+                                ✉
+                            </span>
+
+                            <div>
+
+                                <p class="ac-contact-label">
+                                    Email
+                                </p>
+
+                                <p class="ac-contact-text">
+                                    <a href="mailto:concierge@albertoclocks.ch">
+                                        concierge@albertoclocks.ch
+                                    </a>
+                                </p>
+
+                            </div>
+
+                        </li>
+
+
+                        <!-- OPENING HOURS -->
+
+                        <li class="ac-contact-info-item">
+
+                            <span class="ac-contact-icon"
+                                  aria-hidden="true">
+                                ◷
+                            </span>
+
+                            <div>
+
+                                <p class="ac-contact-label">
+                                    Opening Hours
+                                </p>
+
+                                <p class="ac-contact-text">
+                                    Monday – Saturday:<br>
+                                    10:00 – 19:00 CET<br><br>
+
+                                    Sunday:<br>
+                                    Private Bookings
+                                </p>
+
+                            </div>
+
+                        </li>
+
+                    </ul>
+
+
+                    <a class="ac-btn ac-btn-primary ac-btn-full"
+                       href="https://www.google.com/maps/search/?api=1&amp;query=Rue+du+Rh%C3%B4ne+42%2C+1204+Gen%C3%A8ve%2C+Switzerland"
+                       target="_blank"
+                       rel="noopener noreferrer">
+
+                        <span>Get Directions</span>
+
+                        <span aria-hidden="true">↗</span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- MAP -->
+
+            <div class="col-12 col-lg-7">
+
+                <div class="ac-store-map-card ac-reveal-up">
+
+                    <div class="ac-store-map-heading">
+
+                        <span>ALBERTO GENEVA</span>
+
+                        <span>SWITZERLAND</span>
+
+                    </div>
+
+
+                    <iframe
+                        class="ac-store-map"
+                        title="Map showing the Alberto Geneva project location"
+                        src="https://maps.google.com/maps?q=Rue%20du%20Rh%C3%B4ne%2042%2C%201204%20Gen%C3%A8ve%2C%20Switzerland&amp;z=15&amp;output=embed"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        allowfullscreen>
+                    </iframe>
+
+
+                    <div class="ac-store-map-footer">
+
+                        <span>⌖</span>
+
+                        <p>
+                            Rue du Rhône 42, Geneva
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- END STORE LOCATOR -->
+
+
+<!-- =========================================
+     ALBERTO CUSTOMER SUPPORT
+     ========================================= -->
+
+<section class="ac-section ac-support"
+         id="support"
+         aria-labelledby="support-heading">
+
+    <div class="container">
+
+        <div class="ac-section-header text-center">
+
+            <p class="ac-section-eyebrow ac-reveal-left">
+                — At Your Service —
+            </p>
+
+            <h2 class="ac-section-heading ac-reveal-up"
+                id="support-heading">
+                Client Support
+            </h2>
+
+            <p class="ac-section-subtext ac-reveal-up">
+                From selecting your timepiece to caring
+                for it over the years, our concierge
+                team is here to assist.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4 align-items-start">
+
+
+            <!-- SUPPORT INFORMATION -->
+
+            <div class="col-12 col-lg-5">
+
+                <div class="ac-contact-card ac-support-card ac-reveal-left">
+
+                    <p class="ac-section-eyebrow">
+                        Alberto Concierge
+                    </p>
+
+                    <h3 class="ac-contact-card-title">
+                        How Can We Help?
+                    </h3>
+
+
+                    <p class="ac-support-intro">
+                        Whether you need assistance with
+                        a purchase enquiry, servicing,
+                        restoration or a bespoke request,
+                        contact our concierge team.
+                    </p>
+
+
+                    <div class="ac-support-service">
+
+                        <span aria-hidden="true">⌚</span>
+
+                        <div>
+
+                            <h4>Watch Servicing</h4>
+
+                            <p>
+                                Enquire about maintenance,
+                                inspections and timepiece care.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="ac-support-service">
+
+                        <span aria-hidden="true">✧</span>
+
+                        <div>
+
+                            <h4>Heritage Restoration</h4>
+
+                            <p>
+                                Request information about
+                                restoring and preserving
+                                vintage timepieces.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="ac-support-service">
+
+                        <span aria-hidden="true">♜</span>
+
+                        <div>
+
+                            <h4>Bespoke Commissions</h4>
+
+                            <p>
+                                Discuss custom timepiece
+                                requirements with our team.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <a href="#contact"
+                       class="ac-btn ac-btn-primary ac-btn-full">
+
+                        <span>Contact Concierge</span>
+
+                        <span aria-hidden="true">↗</span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- FREQUENTLY ASKED QUESTIONS -->
+
+            <div class="col-12 col-lg-7">
+
+                <div class="ac-contact-card ac-support-faq-card ac-reveal-up">
+
+                    <h3 class="ac-contact-card-title">
+                        Frequently Asked Questions
+                    </h3>
+
+
+                    <div class="ac-support-faq">
+
+
+                        <!-- FAQ 1 -->
+
+                        <details class="ac-faq-item" open>
+
+                            <summary>
+                                How can I request watch repair
+                                or restoration?
+                            </summary>
+
+                            <div class="ac-faq-answer">
+
+                                <p>
+                                    Contact our concierge team
+                                    using the consultation form.
+                                    Include your watch reference,
+                                    a description of the issue
+                                    and any relevant details.
+                                    Select Heritage Restoration
+                                    &amp; Service as your
+                                    consultation type.
+                                </p>
+
+                            </div>
+
+                        </details>
+
+
+                        <!-- FAQ 2 -->
+
+                        <details class="ac-faq-item">
+
+                            <summary>
+                                How do I arrange routine
+                                watch servicing?
+                            </summary>
+
+                            <div class="ac-faq-answer">
+
+                                <p>
+                                    Contact Alberto to enquire
+                                    about a servicing assessment.
+                                    Our team can review your
+                                    timepiece information and
+                                    advise you on the next steps.
+                                </p>
+
+                            </div>
+
+                        </details>
+
+
+                        <!-- FAQ 3 -->
+
+                        <details class="ac-faq-item">
+
+                            <summary>
+                                How can I check my warranty?
+                            </summary>
+
+                            <div class="ac-faq-answer">
+
+                                <p>
+                                    Refer to your purchase
+                                    documentation for the warranty
+                                    terms applicable to your watch.
+                                    You can also contact our
+                                    concierge team with your
+                                    model reference for assistance.
+                                </p>
+
+                            </div>
+
+                        </details>
+
+
+                        <!-- FAQ 4 -->
+
+                        <details class="ac-faq-item">
+
+                            <summary>
+                                How can I enquire about a watch?
+                            </summary>
+
+                            <div class="ac-faq-answer">
+
+                                <p>
+                                    Visit our New Arrivals section
+                                    to explore the catalogue.
+                                    Each watch has a Quick View
+                                    option displaying its price,
+                                    collection and specifications.
+                                    For additional enquiries,
+                                    contact our team.
+                                </p>
+
+                            </div>
+
+                        </details>
+
+
+                        <!-- FAQ 5 -->
+
+                        <details class="ac-faq-item">
+
+                            <summary>
+                                Can I request a bespoke timepiece?
+                            </summary>
+
+                            <div class="ac-faq-answer">
+
+                                <p>
+                                    Yes, you can submit a bespoke
+                                    commission enquiry through
+                                    the consultation form.
+                                    Select Bespoke Timepiece
+                                    Commission and describe
+                                    your requirements.
+                                </p>
+
+                            </div>
+
+                        </details>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- END CUSTOMER SUPPORT -->
+
+
     <!-- ==================== CONTACT ==================== -->
     <section class="ac-section ac-contact" id="contact" aria-labelledby="contact-heading">
       <div class="container">
@@ -916,6 +1481,85 @@
     </div>
 
     <!-- ==================== BACK TO TOP ==================== -->
+    
+<!-- =========================================
+     ALBERTO PRODUCT DETAILS MODAL
+     ========================================= -->
+
+<div class="ac-product-modal"
+     id="acProductModal"
+     role="dialog"
+     aria-modal="true"
+     aria-hidden="true"
+     aria-labelledby="acModalName"
+     aria-describedby="acModalDescription">
+
+    <div class="ac-product-modal-panel">
+
+        <!-- CLOSE BUTTON -->
+
+        <button type="button"
+                class="ac-product-modal-close"
+                id="acProductModalClose"
+                aria-label="Close product details">
+
+            &times;
+
+        </button>
+
+        <!-- PRODUCT IMAGE -->
+
+        <div class="ac-product-modal-image-wrap">
+
+            <img id="acModalImage"
+                 class="ac-product-modal-image"
+                 src=""
+                 alt="">
+
+        </div>
+
+        <!-- PRODUCT INFORMATION -->
+
+        <div class="ac-product-modal-details">
+
+            <p class="ac-product-modal-eyebrow"
+               id="acModalCollection">
+
+            </p>
+
+            <h2 id="acModalName"></h2>
+
+            <p class="ac-product-modal-model"
+               id="acModalReference">
+
+            </p>
+
+            <p class="ac-product-modal-price"
+               id="acModalPrice">
+
+            </p>
+
+            <p class="ac-product-modal-description"
+               id="acModalDescription">
+
+            </p>
+
+            <!-- WATCH SPECIFICATIONS -->
+
+            <h3>Watch Specifications</h3>
+
+            <dl class="ac-product-spec-list"
+                id="acModalSpecifications">
+
+            </dl>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- END PRODUCT DETAILS MODAL -->
     <button id="acBackToTop" class="ac-back-top" title="Back to Top" aria-label="Scroll back to top">
       <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
     </button>
@@ -952,8 +1596,10 @@
               <li><a href="#home">Home</a></li>
               <li><a href="#arrivals">New Arrivals</a></li>
               <li><a href="#technology">Technology</a></li>
+              <li><a href="#store-locator">Store Locator</a></li>
               <li><a href="#gallery">Gallery</a></li>
               <li><a href="#about">About</a></li>
+              <li><a href="#support">Support</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
           </div>
@@ -990,6 +1636,153 @@
           <a href="#">Sitemap</a>
         </div>
       </div>
+
+<!-- =========================================
+     ALBERTO LIVE DATE TIME LOCATION TICKER
+     ========================================= -->
+
+<div class="ac-live-ticker"
+     role="region"
+     aria-label="Current date, time and visitor location">
+
+    <div class="ac-live-ticker-track">
+
+        <!-- FIRST TICKER GROUP -->
+
+        <div class="ac-ticker-group">
+
+            <span class="ac-ticker-item">
+
+                <span class="ac-ticker-label">
+                    DATE
+                </span>
+
+                <time class="ac-ticker-date">
+                    Loading date...
+                </time>
+
+            </span>
+
+
+            <span class="ac-ticker-separator"
+                  aria-hidden="true">✦</span>
+
+
+            <span class="ac-ticker-item">
+
+                <span class="ac-ticker-label">
+                    LOCAL TIME
+                </span>
+
+                <time class="ac-ticker-time">
+                    Loading time...
+                </time>
+
+            </span>
+
+
+            <span class="ac-ticker-separator"
+                  aria-hidden="true">✦</span>
+
+
+            <span class="ac-ticker-item">
+
+                <span class="ac-ticker-label">
+                    VISITOR LOCATION
+                </span>
+
+                <span class="ac-ticker-location">
+                    Waiting for location permission...
+                </span>
+
+            </span>
+
+
+            <span class="ac-ticker-separator"
+                  aria-hidden="true">✦</span>
+
+
+            <span class="ac-ticker-item">
+
+                <span class="ac-ticker-label">
+                    TIME ZONE
+                </span>
+
+                <span class="ac-ticker-zone">
+                    Detecting...
+                </span>
+
+            </span>
+
+        </div>
+
+
+        <!-- SECOND GROUP FOR CONTINUOUS SCROLLING -->
+
+        <div class="ac-ticker-group"
+             aria-hidden="true">
+
+            <span class="ac-ticker-item">
+
+                <span class="ac-ticker-label">
+                    DATE
+                </span>
+
+                <time class="ac-ticker-date"></time>
+
+            </span>
+
+
+            <span class="ac-ticker-separator">✦</span>
+
+
+            <span class="ac-ticker-item">
+
+                <span class="ac-ticker-label">
+                    LOCAL TIME
+                </span>
+
+                <time class="ac-ticker-time"></time>
+
+            </span>
+
+
+            <span class="ac-ticker-separator">✦</span>
+
+
+            <span class="ac-ticker-item">
+
+                <span class="ac-ticker-label">
+                    VISITOR LOCATION
+                </span>
+
+                <span class="ac-ticker-location"></span>
+
+            </span>
+
+
+            <span class="ac-ticker-separator">✦</span>
+
+
+            <span class="ac-ticker-item">
+
+                <span class="ac-ticker-label">
+                    TIME ZONE
+                </span>
+
+                <span class="ac-ticker-zone"></span>
+
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- END ALBERTO LIVE TICKER -->
+
+
     </footer>
 
     <!--  SCRIPTS  -->

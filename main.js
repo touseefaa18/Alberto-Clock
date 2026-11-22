@@ -155,12 +155,61 @@ var albertoWatches = [];
       if (sec && sections.indexOf(sec) === -1) sections.push(sec);
     });
 
-    function setActive(id) {
-      $navLinks.each(function () {
-        var linkId = $(this).attr("href").replace("#", "");
-        $(this).toggleClass("ac-active", linkId === id);
-      });
+    
+function setActive(id) {
+
+    $navLinks.each(function () {
+
+        var href = $(this).attr("href") || "";
+
+        var isActive = href === "#" + id;
+
+        $(this).toggleClass("ac-active", isActive);
+
+
+        // Identify the current navigation destination.
+        if (isActive) {
+
+            $(this).attr("aria-current", "location");
+
+        } else {
+
+            $(this).removeAttr("aria-current");
+
+        }
+
+    });
+
+}
+
+
+/* UPDATE ACTIVE MENU IMMEDIATELY AFTER CLICK */
+
+$navLinks.on("click.acActiveNav", function () {
+
+    var href = $(this).attr("href");
+
+    // Ignore invalid or external navigation links.
+    if (!href || href === "#" || href.charAt(0) !== "#") {
+        return;
     }
+
+    var targetId = href.substring(1);
+
+    // Confirm the destination exists.
+    if (!document.getElementById(targetId)) {
+        console.warn(
+            "Navigation destination not found:",
+            targetId
+        );
+        return;
+    }
+
+    // Highlight the matching desktop and mobile links.
+    setActive(targetId);
+
+});
+
 
     if ("IntersectionObserver" in window) {
       var observer = new IntersectionObserver(function (entries) {
@@ -572,227 +621,65 @@ var albertoWatches = [];
   })();
 
 
+
 (function () {
+    "use strict";
 
     const $productGrid = $("#acProductGrid");
-
-
-const $categoryFilters = $("#acCategoryFilters");
-const $catalogueStatus = $("#acCatalogueStatus");
-
-let activeCategory = "all";
-let activeSort = "featured";
-
-function getFilteredWatches() {
-
-    return albertoWatches.filter(function (watch) {
-
-        const watchCategory = String(
-            watch.category || ""
-        ).toLowerCase();
-
-        return (
-            activeCategory === "all" ||
-            watchCategory === activeCategory
-        );
-
-    });
-
-}
-
-function getSortedWatches(watches) {
-
-    const sorted = watches.slice();
-
-    switch (activeSort) {
-
-        case "price-low":
-
-            sorted.sort(function (a, b) {
-                return Number(a.price) - Number(b.price);
-            });
-
-            break;
-
-
-        case "price-high":
-
-            sorted.sort(function (a, b) {
-                return Number(b.price) - Number(a.price);
-            });
-
-            break;
-
-
-        case "name-az":
-
-            sorted.sort(function (a, b) {
-                return a.name.localeCompare(
-                    b.name,
-                    undefined,
-                    { sensitivity: "base" }
-                );
-            });
-
-            break;
-
-
-        case "name-za":
-
-            sorted.sort(function (a, b) {
-                return b.name.localeCompare(
-                    a.name,
-                    undefined,
-                    { sensitivity: "base" }
-                );
-            });
-
-            break;
-
-
-        case "featured":
-
-        default:
-
-            break;
-
-    }
-
-    return sorted;
-
-}
-
-
-function renderCatalogue() {
-
-  
-
-    const filtered = getFilteredWatches();
-
-    const finalProducts = getSortedWatches(filtered);
-
-    renderWatchCards(finalProducts);
-
-    
-    if ($catalogueStatus.length) {
-
-        const categoryName =
-            activeCategory === "all"
-                ? "All collections"
-                : activeCategory;
-
-        $catalogueStatus.text(
-            "Showing " +
-            finalProducts.length +
-            " of " +
-            albertoWatches.length +
-            " watches · " +
-            categoryName
-        );
-
-    }
-
-}
-
-
-/* CATEGORY BUTTON CLICK EVENTS */
-
-$categoryFilters.on(
-    "click",
-    ".ac-category-filter",
-    function () {
-
-        // Get selected category.
-        activeCategory = String(
-            $(this).attr("data-category")
-        ).toLowerCase();
-
-
-        // Remove active styling from every button.
-        $categoryFilters
-            .find(".ac-category-filter")
-            .removeClass("ac-selected")
-            .attr("aria-pressed", "false");
-
-
-        // Highlight the selected button.
-        $(this)
-            .addClass("ac-selected")
-            .attr("aria-pressed", "true");
-
-
-        // Refresh catalogue.
-        renderCatalogue();
-
-    }
-);
-
-
-
-$("#acProductSort").on("change", function () {
-
-    // Read selected sorting option.
-    activeSort = $(this).val();
-
-    // Refresh the catalogue.
-    renderCatalogue();
-
-});
-
-
+    const $categoryFilters = $("#acCategoryFilters");
+    const $catalogueStatus = $("#acCatalogueStatus");
+    const $productModal = $("#acProductModal");
+
+    let activeCategory = "all";
+    let activeSort = "featured";
+    let lastModalTrigger = null;
+    let previousBodyOverflow = "";
 
     if (!$productGrid.length) {
-        console.error("Product grid was not found.");
+        console.error("Product grid #acProductGrid was not found.");
         return;
     }
 
+    /* =========================================
+       SHARED PRODUCT HELPERS
+       ========================================= */
 
     function formatWatchPrice(watch) {
+        const price = Number(watch.price);
+        const currency = watch.currency || "USD";
 
-        return new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: watch.currency || "USD",
-            maximumFractionDigits: 0
-        }).format(Number(watch.price));
-
+        try {
+            return new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: currency,
+                maximumFractionDigits: 0
+            }).format(price);
+        } catch (error) {
+            return currency + " " + price.toLocaleString("en-US");
+        }
     }
 
-
-   
     function getWatchBadge(category) {
-
         const badges = {
-
-            Classic: {
-                text: "New",
-                className: "ac-badge-new"
-            },
-
-            Vintage: {
-                text: "Heritage",
-                className: "ac-badge-trending"
-            },
-
-            Luxury: {
-                text: "Exclusive",
-                className: "ac-badge-exclusive"
-            }
-
+            Classic: { text: "New", className: "ac-badge-new" },
+            Vintage: { text: "Heritage", className: "ac-badge-trending" },
+            Luxury: { text: "Exclusive", className: "ac-badge-exclusive" }
         };
 
         return badges[category] || {
             text: "Featured",
             className: "ac-badge-new"
         };
-
     }
 
-    function createWatchCard(watch, index) {
+    /* =========================================
+       CREATE A PRODUCT CARD FROM JSON
+       ========================================= */
 
+    function createWatchCard(watch, index) {
         const $column = $("<div>", {
             class: "col-12 col-sm-6 col-xl-3"
         });
-
 
         const $card = $("<article>", {
             class: "ac-watch-card ac-reveal-up",
@@ -800,9 +687,7 @@ $("#acProductSort").on("change", function () {
         });
 
         $card.attr("itemscope", "");
-        $card.attr("itemtype",
-            "https://schema.org/Product"
-        );
+        $card.attr("itemtype", "https://schema.org/Product");
 
         const $image = $("<div>", {
             class: "ac-watch-card-img",
@@ -810,25 +695,14 @@ $("#acProductSort").on("change", function () {
             "aria-label": watch.name + " luxury watch"
         });
 
-        const imageURL = new URL(
-            watch.image,
-            document.baseURI
-        );
-
-        $image.css(
-            "background-image",
-            'url("' + imageURL.href + '")'
-        );
-
+        const imageURL = new URL(watch.image, document.baseURI);
+        $image.css("background-image", 'url("' + imageURL.href + '")');
 
         const badge = getWatchBadge(watch.category);
-
         const $badge = $("<span>", {
             class: "ac-watch-badge " + badge.className
         }).text(badge.text);
-
         $image.append($badge);
-
 
         const $overlay = $("<div>", {
             class: "ac-watch-card-hover-overlay"
@@ -839,194 +713,781 @@ $("#acProductSort").on("change", function () {
             type: "button",
             "aria-label": "Quick view " + watch.name
         })
-        .attr("data-product-id", watch.id)
-        .text("Quick View");
+            .attr("data-product-id", watch.id)
+            .text("Quick View");
 
         $overlay.append($quickView);
-
         $image.append($overlay);
 
         const $body = $("<div>", {
             class: "ac-watch-card-body"
         });
 
-
         const $collection = $("<p>", {
             class: "ac-watch-collection",
             itemprop: "brand"
-        }).text(
-            (watch.brand || "Alberto") +
-            " · " +
-            (watch.collection || "Collection")
-        );
-
+        }).text((watch.brand || "Alberto") + " · " + (watch.collection || "Collection"));
 
         const $name = $("<h3>", {
             class: "ac-watch-name",
             itemprop: "name"
         }).text(watch.name);
 
-
         const $description = $("<p>", {
             class: "ac-watch-desc",
             itemprop: "description"
-        }).text(watch.description);
+        }).text(watch.description || "");
 
-
-        // PRICE FOOTER
         const $footer = $("<div>", {
             class: "ac-watch-footer"
         });
-
 
         const $price = $("<span>", {
             class: "ac-watch-price",
             itemprop: "price"
         })
-        .attr("content", watch.price)
-        .text(formatWatchPrice(watch));
-
+            .attr("content", watch.price)
+            .text(formatWatchPrice(watch));
 
         const $explore = $("<button>", {
             class: "ac-btn-card",
-            type: "button"
+            type: "button",
+            "aria-label": "Explore " + watch.name
         })
-        .attr("data-product-id", watch.id)
-        .text("Explore More");
+            .attr("data-product-id", watch.id)
+            .text("Explore More");
 
-
-        // Assemble the complete card.
         $footer.append($price, $explore);
-
-        $body.append(
-            $collection,
-            $name,
-            $description,
-            $footer
-        );
-
+        $body.append($collection, $name, $description, $footer);
         $card.append($image, $body);
-
         $column.append($card);
 
         return $column;
-
     }
 
+    /* =========================================
+       RENDER PRODUCT CARDS
+       ========================================= */
 
-  
     function renderWatchCards(watches) {
-
         $productGrid.empty();
 
         if (!watches.length) {
-
             $productGrid.append(
-                $("<div>", {
-                    class: "col-12 text-center"
-                }).text("No watches are currently available.")
+                $("<div>", { class: "col-12 text-center" })
+                    .text("No watches are currently available.")
             );
-
             return;
         }
 
-
         watches.forEach(function (watch, index) {
-
-            if (
-                !watch.id ||
-                !watch.name ||
-                !watch.image ||
-                isNaN(Number(watch.price))
-            ) {
-                console.warn(
-                    "Invalid watch record:",
-                    watch
-                );
-
+            if (!watch.id || !watch.name || !watch.image || !Number.isFinite(Number(watch.price))) {
+                console.warn("Invalid watch record:", watch);
                 return;
             }
 
-
             const $card = createWatchCard(watch, index);
-
             $productGrid.append($card);
 
-
-            // Trigger the existing reveal animation.
-            setTimeout(function () {
-
-                $card.find(".ac-watch-card")
-                    .addClass("ac-revealed");
-
+            window.setTimeout(function () {
+                $card.find(".ac-watch-card").addClass("ac-revealed");
             }, 50 + index * 100);
+        });
+    }
+
+    /* =========================================
+       CATEGORY FILTERING AND SORTING
+       ========================================= */
+
+    function getFilteredWatches() {
+        return albertoWatches.filter(function (watch) {
+            const watchCategory = String(watch.category || "").toLowerCase();
+            return activeCategory === "all" || watchCategory === activeCategory;
+        });
+    }
+
+    function getSortedWatches(watches) {
+        const sorted = watches.slice();
+
+        switch (activeSort) {
+            case "price-low":
+                sorted.sort(function (a, b) {
+                    return Number(a.price) - Number(b.price);
+                });
+                break;
+
+            case "price-high":
+                sorted.sort(function (a, b) {
+                    return Number(b.price) - Number(a.price);
+                });
+                break;
+
+            case "name-az":
+                sorted.sort(function (a, b) {
+                    return a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
+                });
+                break;
+
+            case "name-za":
+                sorted.sort(function (a, b) {
+                    return b.name.localeCompare(a.name, undefined, { sensitivity: "base" });
+                });
+                break;
+
+            case "featured":
+            default:
+                // Keep the original JSON order.
+                break;
+        }
+
+        return sorted;
+    }
+
+    function renderCatalogue() {
+        const filtered = getFilteredWatches();
+        const finalProducts = getSortedWatches(filtered);
+
+        renderWatchCards(finalProducts);
+
+        if ($catalogueStatus.length) {
+            const categoryName = activeCategory === "all"
+                ? "All collections"
+                : activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1);
+
+            $catalogueStatus.text(
+                "Showing " + finalProducts.length +
+                " of " + albertoWatches.length +
+                " watches · " + categoryName
+            );
+        }
+    }
+
+    /* =========================================
+       DYNAMIC COMPLETE PRICE LIST
+       ========================================= */
+
+    function renderPriceList() {
+        const $tableBody = $("#acPriceTableBody");
+        if (!$tableBody.length) return;
+
+        $tableBody.empty();
+
+        if (!albertoWatches.length) {
+            $("<tr>")
+                .append($("<td>", {
+                    colspan: 6,
+                    class: "ac-price-table-empty"
+                }).text("No watch prices available."))
+                .appendTo($tableBody);
+
+            $("#acPriceCount").text("0 Watches");
+            return;
+        }
+
+        albertoWatches.forEach(function (watch) {
+            const $row = $("<tr>");
+
+            $("<td>", { class: "ac-price-watch-name" })
+                .text(watch.name)
+                .appendTo($row);
+
+            $("<td>", { class: "ac-price-watch-reference" })
+                .text(watch.reference || watch.model || "N/A")
+                .appendTo($row);
+
+            $("<td>")
+                .text(watch.collection || "Alberto Collection")
+                .appendTo($row);
+
+            $("<td>", { class: "ac-price-watch-category" })
+                .text(watch.category || "Classic")
+                .appendTo($row);
+
+            $("<td>", { class: "ac-price-watch-value" })
+                .text(formatWatchPrice(watch))
+                .appendTo($row);
+
+            const $viewButton = $("<button>", {
+                type: "button",
+                class: "ac-price-view-btn",
+                "aria-label": "View details for " + watch.name
+            })
+                .attr("data-product-id", watch.id)
+                .text("View Details");
+
+            $("<td>").append($viewButton).appendTo($row);
+            $tableBody.append($row);
+        });
+
+        $("#acPriceCount").text(albertoWatches.length + " Watches Available");
+    }
+
+    /* =========================================
+       PRODUCT QUICK VIEW MODAL
+       These functions are intentionally outside
+       renderCatalogue() so they are defined once.
+       ========================================= */
+
+    function openWatchModal(productId) {
+        const watch = albertoWatches.find(function (item) {
+            return String(item.id) === String(productId);
+        });
+
+        if (!watch) {
+            console.error("Product not found:", productId);
+            return;
+        }
+
+        if (!$productModal.length) {
+            console.error("Product modal #acProductModal was not found.");
+            return;
+        }
+
+        const imageURL = new URL(watch.image, document.baseURI).href;
+
+        $("#acModalImage").attr({
+            src: imageURL,
+            alt: watch.name + " Alberto watch"
+        });
+
+        $("#acModalCollection").text(
+            [watch.brand || "Alberto", watch.collection || "", watch.category || ""]
+                .filter(Boolean)
+                .join(" · ")
+        );
+
+        $("#acModalName").text(watch.name);
+        $("#acModalReference").text(
+            "REFERENCE " + (watch.reference || watch.model || "N/A")
+        );
+        $("#acModalPrice").text(formatWatchPrice(watch));
+        $("#acModalDescription").text(
+            watch.description || "Product details unavailable."
+        );
+
+        const $specifications = $("#acModalSpecifications").empty();
+
+        if (Array.isArray(watch.specifications) && watch.specifications.length) {
+            watch.specifications.forEach(function (spec) {
+                if (!spec || !spec.label || !spec.value) return;
+                $("<dt>").text(spec.label).appendTo($specifications);
+                $("<dd>").text(spec.value).appendTo($specifications);
+            });
+        } else {
+            $("<dt>").text("Specifications").appendTo($specifications);
+            $("<dd>").text("Specifications currently unavailable.").appendTo($specifications);
+        }
+
+        previousBodyOverflow = $("body").css("overflow");
+        $("body").css("overflow", "hidden");
+
+        $productModal
+            .addClass("ac-open")
+            .attr("aria-hidden", "false");
+
+        $("#acProductModalClose").trigger("focus");
+    }
+
+    function closeWatchModal() {
+        if (!$productModal.hasClass("ac-open")) return;
+
+        $productModal
+            .removeClass("ac-open")
+            .attr("aria-hidden", "true");
+
+        $("body").css("overflow", previousBodyOverflow);
+
+        window.setTimeout(function () {
+            if (!$productModal.hasClass("ac-open")) {
+                $("#acModalImage").attr("src", "");
+            }
+        }, 320);
+
+        if (lastModalTrigger && document.documentElement.contains(lastModalTrigger)) {
+            $(lastModalTrigger).trigger("focus");
+        }
+        lastModalTrigger = null;
+    }
+
+    /*
+       IMPORTANT FIX:
+       Event delegation is attached to document because product
+       cards are created dynamically after watches.json loads.
+       This handler is registered once, not during each render.
+    */
+    $(document)
+        .off("click.acWatchModal", ".ac-quick-view-btn, .ac-btn-card, .ac-price-view-btn")
+        .on(
+            "click.acWatchModal",
+            ".ac-quick-view-btn, .ac-btn-card, .ac-price-view-btn",
+            function (event) {
+                event.preventDefault();
+                const productId = $(this).attr("data-product-id");
+
+                if (!productId) {
+                    console.error("Product ID is missing from the clicked product button.");
+                    return;
+                }
+
+                lastModalTrigger = this;
+                openWatchModal(productId);
+            }
+        );
+
+    $("#acProductModalClose")
+        .off("click.acWatchModal")
+        .on("click.acWatchModal", closeWatchModal);
+
+    $productModal
+        .off("click.acWatchModal")
+        .on("click.acWatchModal", function (event) {
+            if (event.target === this) closeWatchModal();
+        });
+
+    $(document)
+        .off("keydown.acWatchModal")
+        .on("keydown.acWatchModal", function (event) {
+            if (!$productModal.hasClass("ac-open")) return;
+
+            if (event.key === "Escape") {
+                event.preventDefault();
+                closeWatchModal();
+                return;
+            }
+
+            if (event.key === "Tab") {
+                const focusable = $productModal.find(
+                    'button:not([disabled]), a[href], input:not([disabled]), ' +
+                    'select:not([disabled]), textarea:not([disabled]), ' +
+                    '[tabindex]:not([tabindex="-1"])'
+                ).filter(":visible");
+
+                if (!focusable.length) return;
+
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first.focus();
+                }
+            }
+        });
+
+    /* =========================================
+       CATEGORY AND SORT CONTROL EVENTS
+       ========================================= */
+
+    $categoryFilters.on("click", ".ac-category-filter", function () {
+        activeCategory = String($(this).attr("data-category") || "all").toLowerCase();
+
+        $categoryFilters
+            .find(".ac-category-filter")
+            .removeClass("ac-selected")
+            .attr("aria-pressed", "false");
+
+        $(this)
+            .addClass("ac-selected")
+            .attr("aria-pressed", "true");
+
+        renderCatalogue();
+    });
+
+    $("#acProductSort").on("change", function () {
+        activeSort = $(this).val() || "featured";
+        renderCatalogue();
+    });
+
+    /* =========================================
+       LOAD JSON PRODUCT DATABASE
+       ========================================= */
+
+    fetch("./data/watches.json")
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error("Unable to load watches.json (HTTP " + response.status + ")");
+            }
+            return response.json();
+        })
+        .then(function (data) {
+            if (!Array.isArray(data)) {
+                throw new Error("Product data must be a JSON array.");
+            }
+
+            albertoWatches = data;
+            renderCatalogue();
+            renderPriceList();
+
+            console.log("Alberto products successfully loaded:", albertoWatches.length);
+        })
+        .catch(function (error) {
+            console.error("Product loading error:", error);
+
+            $productGrid.empty().append(
+                $("<div>", { class: "col-12 text-center" })
+                    .text("Unable to load products. Please check the product database.")
+            );
+
+            const $tableBody = $("#acPriceTableBody");
+            if ($tableBody.length) {
+                $tableBody.empty().append(
+                    $("<tr>").append(
+                        $("<td>", {
+                            colspan: 6,
+                            class: "ac-price-table-empty"
+                        }).text("Unable to load watch prices.")
+                    )
+                );
+            }
+        });
+})();
+
+
+/* =========================================
+   STEP 8: LIVE DATE, TIME AND GEOLOCATION
+   ========================================= */
+
+(function () {
+
+    // Find all repeated ticker elements.
+    const dateElements = document.querySelectorAll(
+        ".ac-ticker-date"
+    );
+
+    const timeElements = document.querySelectorAll(
+        ".ac-ticker-time"
+    );
+
+    const locationElements = document.querySelectorAll(
+        ".ac-ticker-location"
+    );
+
+    const zoneElements = document.querySelectorAll(
+        ".ac-ticker-zone"
+    );
+
+
+    // Stop if ticker is not present.
+    if (!dateElements.length || !timeElements.length) {
+        return;
+    }
+
+
+    /* =====================================
+       LIVE DATE AND TIME
+       ===================================== */
+
+    function updateAlbertoClock() {
+
+        const now = new Date();
+
+
+        // Current local date.
+        const currentDate = now.toLocaleDateString(
+            "en-GB",
+            {
+                weekday: "short",
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+
+        // Current local time.
+        const currentTime = now.toLocaleTimeString(
+            "en-GB",
+            {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: false
+            }
+        );
+
+
+        // Visitor's time zone.
+        const currentZone =
+            Intl.DateTimeFormat().resolvedOptions().timeZone ||
+            "Local Time";
+
+
+        // Update both ticker groups.
+        dateElements.forEach(function (element) {
+
+            element.textContent = currentDate;
+
+        });
+
+
+        timeElements.forEach(function (element) {
+
+            element.textContent = currentTime;
+
+        });
+
+
+        zoneElements.forEach(function (element) {
+
+            element.textContent = currentZone;
 
         });
 
     }
 
 
-    // Load product information from JSON.
-    fetch("./data/watches.json")
-
-        .then(function (response) {
-
-            if (!response.ok) {
-
-                throw new Error(
-                    "Unable to load watches.json"
-                );
-
-            }
-
-            return response.json();
-
-        })
-
-        .then(function (data) {
-
-            if (!Array.isArray(data)) {
-
-                throw new Error(
-                    "Product data must be a JSON array."
-                );
-
-            }
+    // Run immediately.
+    updateAlbertoClock();
 
 
-            // Store all products for future features.
-            albertoWatches = data;
+    // Update every second.
+    window.setInterval(
+        updateAlbertoClock,
+        1000
+    );
 
 
-            // Display product cards.
-            renderCatalogue();
+    /* =====================================
+       HTML5 GEOLOCATION
+       ===================================== */
 
+    function updateTickerLocation(message) {
 
-            console.log(
-                "Alberto products successfully loaded:",
-                albertoWatches.length
-            );
+        locationElements.forEach(function (element) {
 
-        })
-
-        .catch(function (error) {
-
-            console.error(
-                "Product loading error:",
-                error
-            );
-
-            $productGrid.empty();
-
-            $productGrid.append(
-                $("<div>", {
-                    class: "col-12 text-center"
-                }).text(
-                    "Unable to load products. Please check the product database."
-                )
-            );
+            element.textContent = message;
 
         });
+
+    }
+
+
+    function getVisitorLocation() {
+
+        // Check browser support.
+        if (!navigator.geolocation) {
+
+            updateTickerLocation(
+                "Geolocation not supported"
+            );
+
+            return;
+
+        }
+
+
+        // Geolocation requires a secure context.
+        if (!window.isSecureContext) {
+
+            updateTickerLocation(
+                "Secure connection required"
+            );
+
+            return;
+
+        }
+
+
+        updateTickerLocation(
+            "Requesting location permission..."
+        );
+
+
+        navigator.geolocation.getCurrentPosition(
+
+            // LOCATION SUCCESS
+            function (position) {
+
+                const latitude =
+                    position.coords.latitude.toFixed(4);
+
+                const longitude =
+                    position.coords.longitude.toFixed(4);
+
+
+                const locationText =
+                    "Latitude: " + latitude +
+                    "° | Longitude: " + longitude + "°";
+
+
+                updateTickerLocation(locationText);
+
+
+                console.log(
+                    "Alberto visitor location detected:",
+                    latitude,
+                    longitude
+                );
+
+            },
+
+
+            // LOCATION ERROR
+            function (error) {
+
+                let message;
+
+                switch (error.code) {
+
+                    case error.PERMISSION_DENIED:
+
+                        message = "Location permission denied";
+
+                        break;
+
+
+                    case error.POSITION_UNAVAILABLE:
+
+                        message = "Location unavailable";
+
+                        break;
+
+
+                    case error.TIMEOUT:
+
+                        message = "Location request timed out";
+
+                        break;
+
+
+                    default:
+
+                        message = "Location could not be detected";
+
+                }
+
+
+                updateTickerLocation(message);
+
+
+                console.warn(
+                    "Alberto geolocation:",
+                    message
+                );
+
+            },
+
+
+            // LOCATION OPTIONS
+            {
+
+                enableHighAccuracy: false,
+
+                timeout: 10000,
+
+                maximumAge: 300000
+
+            }
+
+        );
+
+    }
+
+
+    // Request visitor location once.
+    getVisitorLocation();
+
+
+})();
+
+
+/* =========================================
+   STEP 9: ALBERTO WEBSITE VISITOR COUNTER
+   ========================================= */
+
+(function () {
+
+    // Locate visitor counter element.
+    const counterElement = document.getElementById(
+        "acVisitorCount"
+    );
+
+    // Stop if counter is not present.
+    if (!counterElement) {
+        return;
+    }
+
+
+    // Storage keys.
+    const VISITOR_KEY = "alberto_website_visitors";
+
+    const SESSION_KEY = "alberto_session_counted";
+
+
+    try {
+
+        // Retrieve previously saved visitor count.
+        let totalVisitors = Number(
+            localStorage.getItem(VISITOR_KEY)
+        );
+
+
+        // Validate stored number.
+        if (
+            !Number.isSafeInteger(totalVisitors) ||
+            totalVisitors < 0
+        ) {
+
+            totalVisitors = 0;
+
+        }
+
+
+        // Check whether this browser tab has
+        // already counted the current session.
+        const alreadyCounted =
+            sessionStorage.getItem(SESSION_KEY);
+
+
+        // Only increment once per tab session.
+        if (alreadyCounted !== "true") {
+
+            totalVisitors++;
+
+
+            // Save permanent browser count.
+            localStorage.setItem(
+                VISITOR_KEY,
+                String(totalVisitors)
+            );
+
+
+            // Mark current session as counted.
+            sessionStorage.setItem(
+                SESSION_KEY,
+                "true"
+            );
+
+        }
+
+
+        // Display visitor count with formatting.
+        counterElement.textContent =
+            totalVisitors.toLocaleString("en-US");
+
+
+        console.log(
+            "Alberto visitor count:",
+            totalVisitors
+        );
+
+
+    } catch (error) {
+
+        // Storage may be unavailable in some browsers.
+        counterElement.textContent = "—";
+
+        console.warn(
+            "Visitor counter storage unavailable:",
+            error
+        );
+
+    }
+
+
 })();
 
 
