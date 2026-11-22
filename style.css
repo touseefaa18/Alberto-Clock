@@ -1,4 +1,4 @@
-﻿/* ───────────────── 1. CSS CUSTOM PROPERTIES ───────────────── */
+﻿/*  1. CSS CUSTOM PROPERTIES  */
 :root {
   /* Core Palette */
   --ac-bg: #08100f;
@@ -43,7 +43,7 @@
   --radius-lg: 16px;
 }
 
-/* ───────────────── 2. RESET & BASE ───────────────── */
+/*  2. RESET & BASE  */
 *,
 *::before,
 *::after {
@@ -92,7 +92,7 @@ button {
   outline: none;
 }
 
-/* ───────────────── 3. CUSTOM CURSOR ───────────────── */
+/*  3. CUSTOM CURSOR  */
 @media (pointer: fine) {
   .ac-cursor {
     position: fixed;
@@ -133,7 +133,7 @@ button {
   }
 }
 
-/* ───────────────── 4. PRELOADER ───────────────── */
+/*  4. PRELOADER  */
 .ac-preloader {
   position: fixed;
   inset: 0;
@@ -211,7 +211,7 @@ button {
   text-transform: uppercase;
 }
 
-/* ───────────────── 5. HEADER / NAVBAR ───────────────── */
+/*  5. HEADER / NAVBAR  */
 .ac-header {
   position: fixed;
   top: 0;
@@ -511,7 +511,7 @@ button {
   padding-left: 3rem;
 }
 
-/* ───────────────── 6. SCROLL-REVEAL ANIMATIONS ───────────────── */
+/*  6. SCROLL-REVEAL ANIMATIONS  */
 .ac-reveal-up {
   opacity: 0;
   transform: translateY(50px);
@@ -538,7 +538,7 @@ button {
   transform: none !important;
 }
 
-/* ───────────────── 7. SECTION SHARED ───────────────── */
+/*  7. SECTION SHARED  */
 .ac-section {
   padding: var(--section-pad);
   position: relative;
@@ -585,7 +585,7 @@ button {
   line-height: 1.8;
 }
 
-/* ───────────────── 8. BUTTONS ───────────────── */
+/*  8. BUTTONS  */
 .ac-btn {
   display: inline-flex;
   align-items: center;
@@ -694,7 +694,7 @@ button {
   letter-spacing: 3px;
 }
 
-/* ───────────────── 9. HERO SECTION ───────────────── */
+/*  9. HERO SECTION  */
 .ac-hero {
   position: relative;
   min-height: 100svh;
@@ -902,7 +902,7 @@ button {
   text-transform: uppercase;
 }
 
-/* ───────────────── 10. MARQUEE STRIP ───────────────── */
+/*  10. MARQUEE STRIP  */
 .ac-marquee-strip {
   overflow: hidden;
   background: var(--ac-bg-alt);
@@ -938,7 +938,7 @@ button {
   }
 }
 
-/* ───────────────── 11. NEW ARRIVALS ───────────────── */
+/*  11. NEW ARRIVALS  */
 .ac-arrivals {
   background: var(--ac-bg);
 }
@@ -1113,7 +1113,7 @@ button {
   color: var(--ac-gold);
 }
 
-/* ───────────────── 12. TECHNOLOGY ───────────────── */
+/*  12. TECHNOLOGY  */
 .ac-tech {
   background: var(--ac-bg-alt);
   position: relative;
@@ -1256,7 +1256,7 @@ button {
   flex: 1;
 }
 
-/* ───────────────── 13. GALLERY ───────────────── */
+/*  13. GALLERY  */
 .ac-gallery {
   background: var(--ac-bg);
 }
@@ -1348,7 +1348,7 @@ button {
   opacity: 1;
 }
 
-/* ───────────────── 14. ABOUT ───────────────── */
+/*  14. ABOUT  */
 .ac-about {
   background: var(--ac-bg-alt);
 }
@@ -1564,7 +1564,7 @@ button {
   line-height: 1.7;
 }
 
-/* ───────────────── 15. FOUNDERS ───────────────── */
+/*  15. FOUNDERS  */
 .ac-founders {
   background: var(--ac-bg);
 }
@@ -1685,7 +1685,7 @@ button {
   color: var(--ac-text-dark);
 }
 
-/* ───────────────── 16. TESTIMONIALS ───────────────── */
+/*  16. TESTIMONIALS  */
 .ac-testimonials {
   background: var(--ac-bg-alt);
   overflow: hidden;
@@ -1808,7 +1808,7 @@ button {
   transform: scale(1.4);
 }
 
-/* ───────────────── 17. CONTACT ───────────────── */
+/*  17. CONTACT  */
 .ac-contact {
   background: var(--ac-bg);
 }
@@ -1964,7 +1964,7 @@ button {
   color: var(--ac-text-primary);
 }
 
-/* ───────────────── 18. LIGHTBOX ───────────────── */
+/*  18. LIGHTBOX  */
 .ac-lightbox {
   display: none;
   position: fixed;
@@ -2197,7 +2197,7 @@ button {
   box-shadow: 0 0 10px var(--ac-gold-glow);
 }
 
-/* ───────────────── 19. BACK TO TOP ───────────────── */
+/*  19. BACK TO TOP  */
 .ac-back-top {
   position: fixed;
   bottom: 2rem;
@@ -2237,7 +2237,7 @@ button {
   transform: translateY(-3px);
 }
 
-/* ───────────────── 20. FOOTER ───────────────── */
+/*  20. FOOTER  */
 .ac-footer {
   background: var(--ac-bg-card);
   border-top: 1px solid var(--ac-border);
