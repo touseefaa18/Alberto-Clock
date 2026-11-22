@@ -277,89 +277,110 @@
           <p class="ac-section-subtext ac-reveal-up" data-delay="100">Discover the latest masterpieces from our Geneva workshop, each one a testament to Swiss horology at its finest.</p>
         </div>
 
-        <div class="row g-4 ac-arrivals-grid">
-          <!-- Card 1 -->
-          <div class="col-12 col-sm-6 col-xl-3">
-            <article class="ac-watch-card ac-reveal-up" data-delay="0" itemscope itemtype="https://schema.org/Product">
-              <div class="ac-watch-card-img" id="ac-img-1" role="img" aria-label="The Sovereign luxury watch">
-                <span class="ac-watch-badge ac-badge-new">New</span>
-                <div class="ac-watch-card-hover-overlay">
-                  <button class="ac-quick-view-btn" aria-label="Quick view The Sovereign">Quick View</button>
-                </div>
-              </div>
-              <div class="ac-watch-card-body">
-                <p class="ac-watch-collection" itemprop="brand">Alberto · Classic Series</p>
-                <h3 class="ac-watch-name" itemprop="name">The Sovereign</h3>
-                <p class="ac-watch-desc" itemprop="description">AC-101 automatic calibre fitted with an anti-reflective sapphire face and hand-stitched calfskin leather that softens naturally with wear.</p>
-                <div class="ac-watch-footer">
-                  <span class="ac-watch-price" itemprop="price" content="1299">$1,299</span>
-                  <button class="ac-btn-card">Explore More</button>
-                </div>
-              </div>
-            </article>
-          </div>
 
-          <!-- Card 2 -->
-          <div class="col-12 col-sm-6 col-xl-3">
-            <article class="ac-watch-card ac-reveal-up" data-delay="100" itemscope itemtype="https://schema.org/Product">
-              <div class="ac-watch-card-img" id="ac-img-2" role="img" aria-label="The Monarch luxury watch">
-                <span class="ac-watch-badge ac-badge-trending">Trending</span>
-                <div class="ac-watch-card-hover-overlay">
-                  <button class="ac-quick-view-btn" aria-label="Quick view The Monarch">Quick View</button>
-                </div>
-              </div>
-              <div class="ac-watch-card-body">
-                <p class="ac-watch-collection" itemprop="brand">Alberto · Heritage Line</p>
-                <h3 class="ac-watch-name" itemprop="name">The Monarch</h3>
-                <p class="ac-watch-desc" itemprop="description">Built with a 72-hour power reserve. Flip the case over to view the Geneva-striped balance assembly working through the sapphire caseback.</p>
-                <div class="ac-watch-footer">
-                  <span class="ac-watch-price" itemprop="price" content="2450">$2,450</span>
-                  <button class="ac-btn-card">Explore More</button>
-                </div>
-              </div>
-            </article>
-          </div>
 
-          <!-- Card 3 -->
-          <div class="col-12 col-sm-6 col-xl-3">
-            <article class="ac-watch-card ac-reveal-up" data-delay="200" itemscope itemtype="https://schema.org/Product">
-              <div class="ac-watch-card-img" id="ac-img-3" role="img" aria-label="The Luminary luxury watch">
-                <span class="ac-watch-badge ac-badge-limited">Limited</span>
-                <div class="ac-watch-card-hover-overlay">
-                  <button class="ac-quick-view-btn" aria-label="Quick view The Luminary">Quick View</button>
-                </div>
-              </div>
-              <div class="ac-watch-card-body">
-                <p class="ac-watch-collection" itemprop="brand">Alberto · Prestige</p>
-                <h3 class="ac-watch-name" itemprop="name">The Luminary</h3>
-                <p class="ac-watch-desc" itemprop="description">Solid 18K rose gold casing with an astronomical moonphase indicator set against an ink-blue lacquered dial and fine Milanese mesh.</p>
-                <div class="ac-watch-footer">
-                  <span class="ac-watch-price" itemprop="price" content="4800">$4,800</span>
-                  <button class="ac-btn-card">Explore More</button>
-                </div>
-              </div>
-            </article>
-          </div>
 
-          <!-- Card 4 -->
-          <div class="col-12 col-sm-6 col-xl-3">
-            <article class="ac-watch-card ac-reveal-up" data-delay="300" itemscope itemtype="https://schema.org/Product">
-              <div class="ac-watch-card-img" id="ac-img-4" role="img" aria-label="The Grandeur luxury tourbillon watch">
-                <span class="ac-watch-badge ac-badge-exclusive">Exclusive</span>
-                <div class="ac-watch-card-hover-overlay">
-                  <button class="ac-quick-view-btn" aria-label="Quick view The Grandeur">Quick View</button>
-                </div>
-              </div>
-              <div class="ac-watch-card-body">
-                <p class="ac-watch-collection" itemprop="brand">Alberto · Elite Edition</p>
-                <h3 class="ac-watch-name" itemprop="name">The Grandeur</h3>
-                <p class="ac-watch-desc" itemprop="description">Grade 5 titanium chassis holding an open-heart flying tourbillon, hand-balanced by our senior horologists over 90 meticulous working hours.</p>
-                <div class="ac-watch-footer">
-                  <span class="ac-watch-price" itemprop="price" content="8990">$8,990</span>
-                  <button class="ac-btn-card">Explore More</button>
-                </div>
-              </div>
-            </article>
+<p class="ac-catalogue-status"
+   id="acCatalogueStatus"
+   role="status"
+   aria-live="polite">
+    Loading watches...
+</p>
+
+
+<!-- PRODUCT CATEGORY FILTERS -->
+
+<div class="ac-catalogue-toolbar">
+
+    <div class="ac-category-filters"
+         id="acCategoryFilters"
+         role="group"
+         aria-label="Filter watches by category">
+
+        <button type="button"
+                class="ac-category-filter ac-selected"
+                data-category="all"
+                aria-pressed="true">
+            All Watches
+        </button>
+
+        <button type="button"
+                class="ac-category-filter"
+                data-category="Vintage"
+                aria-pressed="false">
+            Vintage
+        </button>
+
+        <button type="button"
+                class="ac-category-filter"
+                data-category="Luxury"
+                aria-pressed="false">
+            Luxury
+        </button>
+
+        <button type="button"
+                class="ac-category-filter"
+                data-category="Classic"
+                aria-pressed="false">
+            Classic
+        </button>
+
+    </div>
+
+    <label class="ac-sort-control" for="acProductSort">
+
+    <span>Sort By</span>
+
+    <select id="acProductSort">
+
+        <option value="featured">
+            Featured
+        </option>
+
+        <option value="price-low">
+            Price: Low to High
+        </option>
+
+        <option value="price-high">
+            Price: High to Low
+        </option>
+
+        <option value="name-az">
+            Name: A to Z
+        </option>
+
+        <option value="name-za">
+            Name: Z to A
+        </option>
+
+    </select>
+
+</label>
+
+
+</div>
+</div>
+
+
+<p class="ac-catalogue-status"
+   id="acCatalogueStatus"
+   role="status"
+   aria-live="polite">
+    Loading watches...
+</p>
+
+
+<!-- Dynamic Product Grid -->
+<div
+    class="row g-4 ac-arrivals-grid"
+    id="acProductGrid"
+    aria-live="polite"
+    aria-label="Alberto watch collection">
+
+    <div class="col-12 text-center">
+        <p class="ac-section-subtext">
+            Loading our watch collection...
+        </p>
           </div>
         </div>
       </div>

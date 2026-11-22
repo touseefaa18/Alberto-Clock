@@ -1,0 +1,107 @@
+
+[
+  {
+    "id": 1,
+    "name": "The Sovereign",
+    "reference": "AC-101",
+    "brand": "Alberto",
+    "collection": "Classic Series",
+    "category": "Classic",
+    "price": 1299,
+    "currency": "USD",
+    "image": "./Assets/Screenshot 2026-11-05 004108.webp",
+    "description": "A refined automatic timepiece featuring an anti-reflective sapphire face and hand-stitched calfskin leather.",
+    "specifications": [
+      {
+        "label": "Movement",
+        "value": "Automatic Calibre"
+      },
+      {
+        "label": "Crystal",
+        "value": "Anti-reflective Sapphire"
+      },
+      {
+        "label": "Strap",
+        "value": "Hand-stitched Calfskin"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "The Monarch",
+    "reference": "AC-202",
+    "brand": "Alberto",
+    "collection": "Heritage Line",
+    "category": "Vintage",
+    "price": 2450,
+    "currency": "USD",
+    "image": "./Assets/Screenshot 2026-11-05 004026.webp",
+    "description": "A heritage-inspired timepiece with a 72-hour power reserve and Geneva-striped movement finishing.",
+    "specifications": [
+      {
+        "label": "Power Reserve",
+        "value": "72 Hours"
+      },
+      {
+        "label": "Caseback",
+        "value": "Sapphire Exhibition"
+      },
+      {
+        "label": "Finish",
+        "value": "Geneva Stripes"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "The Luminary",
+    "reference": "AC-303",
+    "brand": "Alberto",
+    "collection": "Prestige",
+    "category": "Luxury",
+    "price": 4800,
+    "currency": "USD",
+    "image": "./Assets/Screenshot 2026-11-05 005548.webp",
+    "description": "An elegant prestige timepiece with a refined dark-blue dial and sophisticated chronograph styling.",
+    "specifications": [
+      {
+        "label": "Dial",
+        "value": "Midnight Blue"
+      },
+      {
+        "label": "Display",
+        "value": "Chronograph"
+      },
+      {
+        "label": "Bracelet",
+        "value": "Polished Stainless Steel"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "The Grandeur",
+    "reference": "AC-404",
+    "brand": "Alberto",
+    "collection": "Elite Edition",
+    "category": "Luxury",
+    "price": 8990,
+    "currency": "USD",
+    "image": "./Assets/Vacheron Constantin Luxury Watch Display.webp",
+    "description": "An exclusive heritage-inspired dress timepiece with an elegant dark dial and refined metallic finish.",
+    "specifications": [
+      {
+        "label": "Collection",
+        "value": "Elite Edition"
+      },
+      {
+        "label": "Dial",
+        "value": "Classic Dark Dial"
+      },
+      {
+        "label": "Style",
+        "value": "Luxury Dress Watch"
+      }
+    ]
+  }
+]

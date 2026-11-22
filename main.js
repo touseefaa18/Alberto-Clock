@@ -7,6 +7,10 @@
 (function ($) {
   "use strict";
 
+ 
+
+var albertoWatches = [];
+
   /* ===== 1. PRELOADER ===== */
   $(window).on("load", function () {
     setTimeout(function () {
@@ -568,4 +572,463 @@
   })();
 
 
+(function () {
+
+    const $productGrid = $("#acProductGrid");
+
+
+const $categoryFilters = $("#acCategoryFilters");
+const $catalogueStatus = $("#acCatalogueStatus");
+
+let activeCategory = "all";
+let activeSort = "featured";
+
+function getFilteredWatches() {
+
+    return albertoWatches.filter(function (watch) {
+
+        const watchCategory = String(
+            watch.category || ""
+        ).toLowerCase();
+
+        return (
+            activeCategory === "all" ||
+            watchCategory === activeCategory
+        );
+
+    });
+
+}
+
+function getSortedWatches(watches) {
+
+    const sorted = watches.slice();
+
+    switch (activeSort) {
+
+        case "price-low":
+
+            sorted.sort(function (a, b) {
+                return Number(a.price) - Number(b.price);
+            });
+
+            break;
+
+
+        case "price-high":
+
+            sorted.sort(function (a, b) {
+                return Number(b.price) - Number(a.price);
+            });
+
+            break;
+
+
+        case "name-az":
+
+            sorted.sort(function (a, b) {
+                return a.name.localeCompare(
+                    b.name,
+                    undefined,
+                    { sensitivity: "base" }
+                );
+            });
+
+            break;
+
+
+        case "name-za":
+
+            sorted.sort(function (a, b) {
+                return b.name.localeCompare(
+                    a.name,
+                    undefined,
+                    { sensitivity: "base" }
+                );
+            });
+
+            break;
+
+
+        case "featured":
+
+        default:
+
+            break;
+
+    }
+
+    return sorted;
+
+}
+
+
+function renderCatalogue() {
+
+  
+
+    const filtered = getFilteredWatches();
+
+    const finalProducts = getSortedWatches(filtered);
+
+    renderWatchCards(finalProducts);
+
+    
+    if ($catalogueStatus.length) {
+
+        const categoryName =
+            activeCategory === "all"
+                ? "All collections"
+                : activeCategory;
+
+        $catalogueStatus.text(
+            "Showing " +
+            finalProducts.length +
+            " of " +
+            albertoWatches.length +
+            " watches · " +
+            categoryName
+        );
+
+    }
+
+}
+
+
+/* CATEGORY BUTTON CLICK EVENTS */
+
+$categoryFilters.on(
+    "click",
+    ".ac-category-filter",
+    function () {
+
+        // Get selected category.
+        activeCategory = String(
+            $(this).attr("data-category")
+        ).toLowerCase();
+
+
+        // Remove active styling from every button.
+        $categoryFilters
+            .find(".ac-category-filter")
+            .removeClass("ac-selected")
+            .attr("aria-pressed", "false");
+
+
+        // Highlight the selected button.
+        $(this)
+            .addClass("ac-selected")
+            .attr("aria-pressed", "true");
+
+
+        // Refresh catalogue.
+        renderCatalogue();
+
+    }
+);
+
+
+
+$("#acProductSort").on("change", function () {
+
+    // Read selected sorting option.
+    activeSort = $(this).val();
+
+    // Refresh the catalogue.
+    renderCatalogue();
+
+});
+
+
+
+    if (!$productGrid.length) {
+        console.error("Product grid was not found.");
+        return;
+    }
+
+
+    function formatWatchPrice(watch) {
+
+        return new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: watch.currency || "USD",
+            maximumFractionDigits: 0
+        }).format(Number(watch.price));
+
+    }
+
+
+   
+    function getWatchBadge(category) {
+
+        const badges = {
+
+            Classic: {
+                text: "New",
+                className: "ac-badge-new"
+            },
+
+            Vintage: {
+                text: "Heritage",
+                className: "ac-badge-trending"
+            },
+
+            Luxury: {
+                text: "Exclusive",
+                className: "ac-badge-exclusive"
+            }
+
+        };
+
+        return badges[category] || {
+            text: "Featured",
+            className: "ac-badge-new"
+        };
+
+    }
+
+    function createWatchCard(watch, index) {
+
+        const $column = $("<div>", {
+            class: "col-12 col-sm-6 col-xl-3"
+        });
+
+
+        const $card = $("<article>", {
+            class: "ac-watch-card ac-reveal-up",
+            "data-delay": index * 100
+        });
+
+        $card.attr("itemscope", "");
+        $card.attr("itemtype",
+            "https://schema.org/Product"
+        );
+
+        const $image = $("<div>", {
+            class: "ac-watch-card-img",
+            role: "img",
+            "aria-label": watch.name + " luxury watch"
+        });
+
+        const imageURL = new URL(
+            watch.image,
+            document.baseURI
+        );
+
+        $image.css(
+            "background-image",
+            'url("' + imageURL.href + '")'
+        );
+
+
+        const badge = getWatchBadge(watch.category);
+
+        const $badge = $("<span>", {
+            class: "ac-watch-badge " + badge.className
+        }).text(badge.text);
+
+        $image.append($badge);
+
+
+        const $overlay = $("<div>", {
+            class: "ac-watch-card-hover-overlay"
+        });
+
+        const $quickView = $("<button>", {
+            class: "ac-quick-view-btn",
+            type: "button",
+            "aria-label": "Quick view " + watch.name
+        })
+        .attr("data-product-id", watch.id)
+        .text("Quick View");
+
+        $overlay.append($quickView);
+
+        $image.append($overlay);
+
+        const $body = $("<div>", {
+            class: "ac-watch-card-body"
+        });
+
+
+        const $collection = $("<p>", {
+            class: "ac-watch-collection",
+            itemprop: "brand"
+        }).text(
+            (watch.brand || "Alberto") +
+            " · " +
+            (watch.collection || "Collection")
+        );
+
+
+        const $name = $("<h3>", {
+            class: "ac-watch-name",
+            itemprop: "name"
+        }).text(watch.name);
+
+
+        const $description = $("<p>", {
+            class: "ac-watch-desc",
+            itemprop: "description"
+        }).text(watch.description);
+
+
+        // PRICE FOOTER
+        const $footer = $("<div>", {
+            class: "ac-watch-footer"
+        });
+
+
+        const $price = $("<span>", {
+            class: "ac-watch-price",
+            itemprop: "price"
+        })
+        .attr("content", watch.price)
+        .text(formatWatchPrice(watch));
+
+
+        const $explore = $("<button>", {
+            class: "ac-btn-card",
+            type: "button"
+        })
+        .attr("data-product-id", watch.id)
+        .text("Explore More");
+
+
+        // Assemble the complete card.
+        $footer.append($price, $explore);
+
+        $body.append(
+            $collection,
+            $name,
+            $description,
+            $footer
+        );
+
+        $card.append($image, $body);
+
+        $column.append($card);
+
+        return $column;
+
+    }
+
+
+  
+    function renderWatchCards(watches) {
+
+        $productGrid.empty();
+
+        if (!watches.length) {
+
+            $productGrid.append(
+                $("<div>", {
+                    class: "col-12 text-center"
+                }).text("No watches are currently available.")
+            );
+
+            return;
+        }
+
+
+        watches.forEach(function (watch, index) {
+
+            if (
+                !watch.id ||
+                !watch.name ||
+                !watch.image ||
+                isNaN(Number(watch.price))
+            ) {
+                console.warn(
+                    "Invalid watch record:",
+                    watch
+                );
+
+                return;
+            }
+
+
+            const $card = createWatchCard(watch, index);
+
+            $productGrid.append($card);
+
+
+            // Trigger the existing reveal animation.
+            setTimeout(function () {
+
+                $card.find(".ac-watch-card")
+                    .addClass("ac-revealed");
+
+            }, 50 + index * 100);
+
+        });
+
+    }
+
+
+    // Load product information from JSON.
+    fetch("./data/watches.json")
+
+        .then(function (response) {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to load watches.json"
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(function (data) {
+
+            if (!Array.isArray(data)) {
+
+                throw new Error(
+                    "Product data must be a JSON array."
+                );
+
+            }
+
+
+            // Store all products for future features.
+            albertoWatches = data;
+
+
+            // Display product cards.
+            renderCatalogue();
+
+
+            console.log(
+                "Alberto products successfully loaded:",
+                albertoWatches.length
+            );
+
+        })
+
+        .catch(function (error) {
+
+            console.error(
+                "Product loading error:",
+                error
+            );
+
+            $productGrid.empty();
+
+            $productGrid.append(
+                $("<div>", {
+                    class: "col-12 text-center"
+                }).text(
+                    "Unable to load products. Please check the product database."
+                )
+            );
+
+        });
+})();
+
+
 })(jQuery);
+
