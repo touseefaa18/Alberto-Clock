@@ -86,7 +86,6 @@
   /* ===== 3. HEADER SCROLL BEHAVIOR ===== */
   (function () {
     var $header = $("#acHeader");
-    var $backTop = $("#acBackToTop");
     var lastScroll = 0;
 
     $(window).on("scroll", function () {
@@ -99,19 +98,7 @@
         $header.removeClass("ac-scrolled");
       }
 
-      /* Back-to-top visibility */
-      if (scrollY > 400) {
-        $backTop.addClass("ac-visible");
-      } else {
-        $backTop.removeClass("ac-visible");
-      }
-
       lastScroll = scrollY;
-    });
-
-    /* Back to top click */
-    $backTop.on("click", function () {
-      $("html, body").animate({ scrollTop: 0 }, 700, "swing");
     });
   })();
 
@@ -707,19 +694,7 @@
   })();
 
   /* ===== 14. NAVBAR GLASS PROGRESS BAR ===== */
-  (function () {
-    var $bar = $(
-      '<div id="acReadBar" style="position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#c9a86c,#e0c48a);z-index:100000;width:0;transition:width 0.1s linear;pointer-events:none;"></div>',
-    );
-    $("body").prepend($bar);
-
-    $(window).on("scroll", function () {
-      var docH = $(document).height() - $(window).height();
-      var scrollY = $(this).scrollTop();
-      var pct = docH > 0 ? (scrollY / docH) * 100 : 0;
-      $bar.css("width", pct + "%");
-    });
-  })();
+  /* REMOVED — golden reading progress bar */
 
   /* ===== 15. HOVER TILT EFFECT ON CARDS ===== */
   (function () {

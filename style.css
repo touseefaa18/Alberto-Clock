@@ -2218,45 +2218,6 @@ button {
   box-shadow: 0 0 10px var(--ac-gold-glow);
 }
 
-/*  19. BACK TO TOP  */
-.ac-back-top {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 9999;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 1px solid var(--ac-border-hover);
-  background: var(--ac-bg-card);
-  color: var(--ac-text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  transition:
-    opacity 0.35s ease,
-    transform 0.35s ease,
-    visibility 0.35s,
-    background 0.3s ease,
-    box-shadow 0.3s ease;
-  box-shadow: 0 4px 20px rgba(201, 168, 108, 0.1);
-}
-.ac-back-top.ac-visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-.ac-back-top:hover {
-  background: var(--ac-gold);
-  color: var(--ac-text-dark);
-  border-color: var(--ac-gold);
-  box-shadow: 0 8px 30px var(--ac-gold-glow);
-  transform: translateY(-3px);
-}
 
 /*  20. FOOTER  */
 .ac-footer {
